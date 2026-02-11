@@ -41,23 +41,50 @@ p {
 }
 
 button {
-  width: 100%;
   font-size: 22px;
-  padding: 14px;
+  padding: 14px 24px;
   border-radius: 18px;
   border: none;
   cursor: pointer;
   margin-top: 12px;
 }
 
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 #yes {
+  width: 100%;
   background: #ff4d6d;
   color: white;
+  animation: pulse 2s infinite;
 }
 
 #no {
+  width: auto;
+  padding: 10px 18px;
+  font-size: 18px;
   background: #eee;
-  position: relative;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
 }
 
 .hearts {
@@ -96,8 +123,10 @@ button {
   <h1>Pranav 💕</h1>
   <p>Will you be my Valentine?</p>
 
-  <button id="yes">YES 😍</button>
-  <button id="no">No 🙄</button>
+  <div class="buttons">
+    <button id="yes">YES 😍</button>
+    <button id="no">No 🙄</button>
+  </div>
 </div>
 
 <script>
@@ -107,8 +136,14 @@ const card = document.getElementById("card");
 
 setInterval(createHeart, 700);
 
-// ORIGINAL escaping NO button (runs away anywhere)
+// Runaway NO + shake
 function moveNo(){
+  noBtn.classList.add("shake");
+
+  setTimeout(() => {
+    noBtn.classList.remove("shake");
+  }, 300);
+
   noBtn.style.position = "absolute";
   noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
   noBtn.style.top = Math.random() * (window.innerHeight - 60) + "px";
