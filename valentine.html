@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine?</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(#ff9a9e, #fad0c4);
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,.2);
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 18px;
+  padding: 10px 25px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin: 10px;
+}
+
+#yes {
+  background: #ff4d6d;
+  color: white;
+}
+
+#no {
+  background: #ddd;
+}
+
+.hearts {
+  position: fixed;
+  font-size: 24px;
+  animation: floatUp 2s linear forwards;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-200px);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Will you be my Valentine? 💘</h1>
+  <button id="yes">Yes 💕</button>
+  <button id="no">No 😢</button>
+  <p id="message"></p>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const message = document.getElementById("message");
+
+yesBtn.onclick = () => {
+  message.innerHTML = "YAY!!! I love you ❤️";
+  for(let i=0;i<20;i++){
+    createHeart();
+  }
+};
+
+noBtn.onmouseover = () => {
+  noBtn.style.position = "absolute";
+  noBtn.style.left = Math.random() * window.innerWidth + "px";
+  noBtn.style.top = Math.random() * window.innerHeight + "px";
+};
+
+function createHeart(){
+  const heart = document.createElement("div");
+  heart.className = "hearts";
+  heart.innerHTML = "❤️";
+  heart.style.left = Math.random()*window.innerWidth + "px";
+  heart.style.top = window.innerHeight + "px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),2000);
+}
+</script>
+
+</body>
+</html>
